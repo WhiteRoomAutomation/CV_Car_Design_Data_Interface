@@ -270,6 +270,8 @@ namespace CV_Car_Design_Data_Interface
 
         private void BtnQueryCar_Click(object sender, EventArgs e)
         {
+            try
+            {
 
             this.lblTare.Text = "";
             this.lblLoad.Text = "";
@@ -309,6 +311,12 @@ namespace CV_Car_Design_Data_Interface
             this.lblTare.Text = "Tare - " + sql_command.Parameters["@Tare_Weight"].Value.ToString();
             this.lblLoad.Text = "Load Limit - " + sql_command.Parameters["@Load_Limit"].Value.ToString();
             sql_connection.Close();
+            }
+            catch (Exception Ex)
+            {
+
+                logger.Error("Error Querying Car information - {0}", Ex.Message);
+            }
 
         }
     }
