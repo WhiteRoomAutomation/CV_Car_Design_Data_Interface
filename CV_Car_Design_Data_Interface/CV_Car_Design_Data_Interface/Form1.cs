@@ -145,7 +145,8 @@ namespace CV_Car_Design_Data_Interface
 
 
                             //execute the query.  Add the number of rows to the rolling count
-                            iCount = iCount + sql_command.ExecuteNonQuery();
+                            sql_command.ExecuteNonQuery();
+                            iCount = iCount + 1;
 
 
 
@@ -165,11 +166,14 @@ namespace CV_Car_Design_Data_Interface
                     lblRowsLoaded.Text = szLoaded;
 
                     sql_connection.Close();
+
                 }
+                
                 catch (Exception exParse)
                 {
                     logger.Error("Error parsing file {0}", exParse.Message);
                 }
+                csv.Dispose();
             }
             catch (Exception exFile)
             {
