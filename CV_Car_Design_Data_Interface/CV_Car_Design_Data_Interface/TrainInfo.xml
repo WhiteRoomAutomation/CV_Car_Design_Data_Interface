@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LoadoutProgram</name>
+    </assembly>
+    <SqlConnectionInfo>Data Source=PHMI001LOADA;Initial Catalog=CN_Train_Data;Trusted_Connection=true</SqlConnectionInfo>
+    
+    <OutputFilePath>\\cvmpb002\files\Excel Train Report\</OutputFilePath>
+    <FontSize>10</FontSize>
+</doc>
