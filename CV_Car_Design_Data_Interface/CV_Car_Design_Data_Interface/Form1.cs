@@ -56,6 +56,7 @@ namespace CV_Car_Design_Data_Interface
             {
                 //init the stream reader and the csv interpreter
                 StreamReader reader = new StreamReader(this.txtFilePath.Text);
+              
                 var csv = new CsvReader(reader);
            
 
@@ -69,12 +70,29 @@ namespace CV_Car_Design_Data_Interface
                     logger.Info(context.RawRow);
                 };
 
+                csv.Configuration.MissingFieldFound = null;
+
+                csv.Configuration.ReadingExceptionOccurred  = null;
+
 
                 try
                 {
                     //get the records from the CSV file
-                    IEnumerable < CN_CSV > records = csv.GetRecords<CN_CSV>();
-
+                    List<CN_CSV> records = new List<CN_CSV>();
+                    while (csv.Read())
+                    {
+                        try
+                        {
+                            var myType = csv.GetRecord<CN_CSV>();
+                            records.Add(myType);
+                            logger.Info(myType.Number);
+                            logger.Info(records.Count);
+                        }
+                        catch (Exception exParse)
+                        {
+                            logger.Error(exParse);
+                        }
+                    }
 
                     //sql setup
                     string szSQLConnectionInfo;
